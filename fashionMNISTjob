@@ -1,0 +1,12 @@
+#PBS -l nodes=1:ppn=2
+cd $PBS_O_WORKDIR
+echo "* Hello from compute server `hostname`!"
+echo "* The current directory is ${PWD}."
+echo "* Compute server's CPU model and number of logical CPUs:"
+lscpu | grep 'Model name\\|^CPU(s)'
+echo "* Training the FashionMNIST Model"
+start=`date +%s`
+python fashionMNISTkeras.py
+end=`date +%s`
+runtime=$((end-start))
+echo "* Done in" + $runtime
